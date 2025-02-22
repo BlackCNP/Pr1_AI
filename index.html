@@ -23,7 +23,7 @@
             animation: fadeIn 2s ease-in-out;
         }
 
-        /* Затемнення фону */
+        
         .overlay {
             display: none;
             position: fixed;
@@ -35,19 +35,19 @@
             z-index: 999;
         }
 
-        /* Стилі для iframe бота (щоб він був поверх затемнення) */
+        
         iframe#engati-iframe {
             position: relative;
             z-index: 1000;
         }
 
-        /* Анімація для заголовка */
+        
         @keyframes fadeIn {
             0% { opacity: 0; }
             100% { opacity: 1; }
         }
 
-        /* Декоративний контейнер */
+        
         .container {
             text-align: center;
             padding: 20px;
@@ -80,12 +80,12 @@
             e:"p"
         });
 
-        // Логіка для затемнення
+        
         document.addEventListener("DOMContentLoaded", function() {
             const overlay = document.getElementById("overlay");
             const botLauncher = document.querySelector(".engati-launcher"); // Клас може бути іншим, перевірте в консолі
 
-            // Перевірка, коли бот з'явиться
+            
             const checkBot = setInterval(() => {
                 const launcher = document.querySelector(".engati-launcher");
                 if (launcher) {
@@ -96,10 +96,10 @@
                 }
             }, 500);
 
-            // Закриття затемнення при кліку на overlay
+            
             overlay.addEventListener("click", () => {
                 overlay.style.display = "none";
-                // Тут можна додати код для закриття бота, якщо API це дозволяє
+                
             });
         });
     </script>

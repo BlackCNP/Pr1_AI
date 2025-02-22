@@ -4,9 +4,104 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat Bot</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #74ebd5, #acb6e5);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h1 {
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            font-size: 3em;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        /* Затемнення фону */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 999;
+        }
+
+        /* Стилі для iframe бота (щоб він був поверх затемнення) */
+        iframe#engati-iframe {
+            position: relative;
+            z-index: 1000;
+        }
+
+        /* Анімація для заголовка */
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        /* Декоративний контейнер */
+        .container {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+    </style>
 </head>
 <body>
-    <h1>Hello World!!</h1>
-    <script>!function(e,t,a){var c=e.head||e.getElementsByTagName("head")[0],n=e.createElement("script");n.async=!0,n.defer=!0, n.type="text/javascript",n.src=t+"/static/js/widget.js?config="+JSON.stringify(a),c.appendChild(n)}(document,"https://app.engati.com",{bot_key:"7615127c77c94b8a",welcome_msg:true,branding_key:"default",server:"https://app.engati.com",e:"p" });</script>
+    <div class="container">
+        <h1>Hello World!!</h1>
+    </div>
+    <div class="overlay" id="overlay"></div>
+
+    <script>
+        !function(e,t,a){
+            var c=e.head||e.getElementsByTagName("head")[0],
+            n=e.createElement("script");
+            n.async=!0;
+            n.defer=!0;
+            n.type="text/javascript";
+            n.src=t+"/static/js/widget.js?config="+JSON.stringify(a);
+            c.appendChild(n)
+        }(document,"https://app.engati.com",{
+            bot_key:"7615127c77c94b8a",
+            welcome_msg:true,
+            branding_key:"default",
+            server:"https://app.engati.com",
+            e:"p"
+        });
+
+        // Логіка для затемнення
+        document.addEventListener("DOMContentLoaded", function() {
+            const overlay = document.getElementById("overlay");
+            const botLauncher = document.querySelector(".engati-launcher"); // Клас може бути іншим, перевірте в консолі
+
+            // Перевірка, коли бот з'явиться
+            const checkBot = setInterval(() => {
+                const launcher = document.querySelector(".engati-launcher");
+                if (launcher) {
+                    launcher.addEventListener("click", () => {
+                        overlay.style.display = "block";
+                    });
+                    clearInterval(checkBot);
+                }
+            }, 500);
+
+            // Закриття затемнення при кліку на overlay
+            overlay.addEventListener("click", () => {
+                overlay.style.display = "none";
+                // Тут можна додати код для закриття бота, якщо API це дозволяє
+            });
+        });
+    </script>
 </body>
 </html>
